@@ -1,0 +1,32 @@
+gfg question.
+without changing the link just changing the data of the nodes.
+firstly count the total number of 0 1 2 present in the nodes.
+then make the data of the nodes according to the count of the  0 1 2.
+
+
+
+void sortList(Node *head) 
+{ 
+    int count[3] = {0, 0, 0};  
+    Node *ptr = head; 
+    while (ptr != NULL) 
+    { 
+        count[ptr->data] += 1; 
+        ptr = ptr->next; 
+    } 
+ 
+    int i = 0; 
+    ptr = head; 
+    while (ptr != NULL) 
+    { 
+        if (count[i] == 0) 
+            ++i; 
+        else
+        { 
+            ptr->data = i; 
+            --count[i]; 
+            ptr = ptr->next; 
+        } 
+    } 
+} 
+ 
