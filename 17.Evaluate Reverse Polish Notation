@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int>st;
+        int first;
+        int second;
+        int n = tokens.size();
+        for(const string& ch:tokens){
+            if (isdigit(ch.back())) {
+                st.push(stoi(ch));
+            }
+            else if(ch[0]=='+'){
+                second =st.top();
+                st.pop();
+                first = st.top();
+                st.pop();
+                int result = first + second;
+                st.push(result);
+            }
+            else if(ch[0]=='-'){
+                second =st.top();
+                st.pop();
+                first = st.top();
+                st.pop();
+                int result = first - second;
+                st.push(result);
+            }
+            else if(ch[0]=='*'){
+                second =st.top();
+                st.pop();
+                first = st.top();
+                st.pop();
+                int result = first * second;
+                st.push(result);
+            }
+            else if(ch[0]=='/'){
+                second =st.top();
+                st.pop();
+                first = st.top();
+                st.pop();
+                int result = first / second;
+                st.push(result);
+            }
+        }
+        return st.top();
+    }
+};
