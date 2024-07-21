@@ -1,0 +1,36 @@
+class Solution {
+    bool checkSub(string s , int l , int r){
+            bool ans ;
+            while(l<r){
+                if(s[l] == s[r]){
+                    l++;
+                    r--;
+                }
+                else
+                return false;
+            }
+            return true;
+    }
+public:
+    bool validPalindrome(string s) {
+        int n = s.size();
+        int i =0;
+        int j = n-1;
+        int count = 0;
+        bool check ;
+        while(i<j){
+            if(s[i] == s[j]){
+                i++;
+                j--;
+            }
+            else{
+               if( checkSub(s , i , j-1) == false  && checkSub(s,i+1,j) == false)
+                return false;
+                return true;
+            }
+             
+        }
+        return true;
+        
+    }
+};
