@@ -1,0 +1,132 @@
+class Solution {
+public:
+    int calculate(string s) {
+        // stack<int>num;
+        // stack<char>op;
+        // int n = s.size();
+        // for(char c : s){
+        //     // cout<<c;
+        //     if(c == '/')
+        //     op.push(c);
+        //     else if(c == '*'){
+        //         if(op.top() == '/'){
+        //             // while(op.top()=='/' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first/second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         op.push(c);
+        //     }
+        //     else if(c == '+'){
+        //         if(op.top() == '/'){
+        //             // while(op.top()=='/' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first/second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         if(op.top()=='*'){
+        //             // while(op.top()=='*' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first*second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         op.push(c);
+        //     }
+        //     else if(c == '-'){
+        //         if(op.top()=='/'){
+        //             // while(op.top()=='/' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first/second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         if(op.top()=='*'){
+        //             // while(op.top()=='*' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first*second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         if(op.top()=='+'){
+        //             // while(op.top()=='+' && !op.empty()){
+        //                 int second = num.top();
+        //                 num.pop();
+        //                 int first = num.top();
+        //                 num.pop();
+        //                 int result = first+second;
+        //                 num.push(result);
+        //                 op.pop();
+        //             // }
+        //         }
+        //         op.push(c);
+        //     }
+        //     else if(c==' ')
+        //         continue;
+        //     else{
+        //         int val = c-'0';
+        //         num.push(val);
+        //     }
+        // }
+        // cout<<num.top()<<" "<<op.top()<<endl;
+        // return 0;
+        s += '+';
+        stack<int> stk; 
+        
+        long long int ans = 0, curr = 0;
+        char sign = '+'; //to store the previously encountered sign
+        
+        for(int i=0; i<s.size(); i++){
+            if(isdigit(s[i])) curr = curr*10 + (s[i]-'0'); //keep forming the number, until you encounter an operator
+            
+            else if(s[i]=='+' || s[i]=='-' || s[i]=='*' || s[i]=='/'){
+                
+                if(sign == '+') stk.push(curr); //'Cause it has to added to the ans
+            
+                else if(sign == '-') stk.push(curr*(-1)); //'Cause it has to be subtracted from ans
+                
+                else if(sign == '*'){
+                    int num = stk.top(); stk.pop();  //Pop the top of the stack
+                    stk.push(num*curr); //Multiply it with the current value & push the result into stack
+                }
+                
+                else if(sign == '/'){
+                    int num = stk.top();stk.pop(); 
+                    stk.push(num/curr);  //Divide it with curr value & push it into the stack
+                }
+                
+                curr = 0; 
+                sign = s[i]; 
+            }
+            
+        }
+        
+        while(stk.size()){
+            ans += stk.top(); stk.pop();
+        }
+            
+        return ans;    
+    }
+};
