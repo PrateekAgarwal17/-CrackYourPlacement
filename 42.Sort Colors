@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int zc =0 , oc =0 , tc=0;
+        int n = nums.size();
+        for(int i : nums){
+            if(i == 0)
+            zc++;
+            else if(i==1)
+            oc++;
+            else
+            tc++;
+        }
+        int j = 0;
+        while(zc--)
+            nums[j++] = 0;
+        while(oc--)
+            nums[j++] =1;
+        while(tc--)
+            nums[j++] = 2;
+    }
+};
